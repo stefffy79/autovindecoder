@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding-top: 0;
+            justify-content: center;
+            align-items: center;
+            background-image: url(https://i.ibb.co/Tqv6zFz/IMG-20240919-142317.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+            font-size: 15px;
+
+        }
+
+        #search {
+            width: 60%;
+            margin-top: 15px;
+            margin-left: 40px;
+            margin-right: 20px;
+            border-radius: 15px;
+            height: 20%;
+        }
+
+        .hidden-list {
+            display: none;
+        }
+
+        .car-list {
+            list-style-type: none;
+            cursor: pointer;
+        }
+
+        .car-list-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .car-image {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            margin-top: 25px;
+        }
+
+        .car-info {
+            display: none;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .name {
+            font-size: 60px;
+            margin-top: 25px;
+
+        }
+
+        .link {
+            text-decoration: none;
+            background-color: azure;
+            padding: 10px;
+            width: 80%;
+            display: block;
+            color: black;
+
+        }
+
+        ul {
+            list-style: none;
+            background-color: #ffffff;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            margin-left: 40px;
+            margin-right: 40px;
+            border-radius: 15px;
+            margin-top: 25px;
+        }
+
+        hr {
+            border: none;
+            border-top: 3px solid black;
+            width: 100%;
+        }
+
+        .btn {
+            width: 20%px;
+            margin-top: 15px;
+            border-radius: 15px;
+            height: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="search" onkeyup="searchCars()" placeholder="Caută după marca auto...">
+    <button class="btn" onclick="resetSearch()">Resetare</button>
+    <ul id="car-list" class="hidden-list">
+        <li class="car-list-item" onclick="showCarInfo(0)">
+            <img class="car-image" src="https://i.ibb.co/gWnL9m8/20231010-175622.png" alt="Marca 1">
+            <span class="name">Mercedes-Benz</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(1)">
+            <img class="car-image" src="https://i.ibb.co/5TQpm5Q/20231010-172539.png" alt="Marca 2">
+            <span class="name">BMW</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(2)">
+            <img class="car-image" src="https://i.ibb.co/8KV9k1z/20231106-212519.png" alt="Marca 3">
+            <span class="name">Alfa Romeo</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(3)">
+            <img class="car-image" src="https://i.ibb.co/0n3PVgv/20231106-213659.png" alt="Marca 4">
+            <span class="name">Audi<span style="display: none;">vag</span></span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(4)">
+            <img class="car-image" src="https://i.ibb.co/gynhnf1/20231107-110610.png" alt="Marca 5">
+            <span class="name">Chrysler</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(5)">
+            <img class="car-image" src="https://i.ibb.co/4m2TMzJ/20231107-111425.png" alt="Marca 6">
+            <span class="name">Citroën<span style="display: none;">Citroen</span></div></span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(6)">
+            <img class="car-image" src="https://i.ibb.co/cJZDcxz/20231107-111601.png" alt="Marca 7">
+            <span class="name">Dacia</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(7)">
+            <img class="car-image" src="https://i.ibb.co/JpHhYJk/20231010-173635.png" alt="Marca 8">
+            <span class="name">Fiat</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(8)">
+            <img class="car-image" src="https://i.ibb.co/4g4ZxJc/20231107-112938.png" alt="Marca 9">
+            <span class="name">Ford</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(9)">
+            <img class="car-image" src="https://i.ibb.co/dkhnxWp/honda-emblem-orig.png" alt="Marca 10">
+            <span class="name">Honda</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(10)">
+            <img class="car-image" src="https://i.ibb.co/RhBxQwM/Hyundai-Logo.png" alt="Marca 11">
+            <span class="name">Hyundai</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(11)">
+            <img class="car-image" src="https://i.ibb.co/XZsCbw2/20231107-141317.png" alt="Marca 12">
+            <span class="name">Infiniti</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(12)">
+            <img class="car-image" src="https://i.ibb.co/nrDPYKy/Jeep-Logo.png" alt="Marca 13">
+            <span class="name">Jeep</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(13)">
+            <img class="car-image" src="https://i.ibb.co/16MJHdM/20231107-143118.png" alt="Marca 14">
+            <span class="name">Kia</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(14)">
+            <img class="car-image" src="https://i.ibb.co/cFXSJZf/20231107-143405.png" alt="Marca 15">
+            <span class="name">Lancia</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(15)">
+            <img class="car-image" src="https://i.ibb.co/tHxRNP4/20231010-174153.png" alt="Marca 16">
+            <span class="name">Land Rover</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(16)">
+            <img class="car-image" src="https://i.ibb.co/nnFWTj3/20231107-143716.png" alt="Marca 17">
+            <span class="name">Lexus</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(17)">
+            <img class="car-image" src="https://i.ibb.co/FDRpmH2/20231107-142558.png" alt="Marca 18">
+            <span class="name">Mazda</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(18)">
+            <img class="car-image" src="https://i.ibb.co/QNBVv2D/20231107-144210.png" alt="Marca 19">
+            <span class="name">Mitsubishi</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(19)">
+            <img class="car-image" src="https://i.ibb.co/41xYRyj/20231010-181249.png" alt="Marca 20">
+            <span class="name">Nissan</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(20)">
+            <img class="car-image"
+                src="https://i.ibb.co/MpfJ3wQ/purepng-com-opel-logoopelopel-automobilemanufacturerfrench-automobileopel-logo-170152752951406eu2.png"
+                alt="Marca 21">
+            <span class="name">Opel</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(21)">
+            <img class="car-image" src="https://i.ibb.co/P9KyZd9/20231107-144918.png" alt="Marca 22">
+            <span class="name">Peugeot</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(22)">
+            <img class="car-image" src="https://i.ibb.co/YBcHbFF/20231107-155107.png" alt="Marca 23">
+            <span class="name">Polaris</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(23)">
+            <img class="car-image" src="https://i.ibb.co/GvXB3pW/20231107-155452.png" alt="Marca 24">
+            <span class="name">Jaguar</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(24)">
+            <img class="car-image" src="https://i.ibb.co/VYTkWGL/20231108-105630.png" alt="Marca 25">
+            <span class="name">Porsche</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(25)">
+            <img class="car-image" src="https://i.ibb.co/vcyyJBS/20231108-110652.png" alt="Marca 26">
+            <span class="name">RAM</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(26)">
+            <img class="car-image" src="https://i.ibb.co/z8wDMGy/20231108-111322.png" alt="Marca 27">
+            <span class="name">Bentley</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(27)">
+            <img class="car-image" src="https://i.ibb.co/GcWFSgv/20231108-112112.png" alt="Marca 28">
+            <span class="name">Maserati</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(28)">
+            <img class="car-image" src="https://i.ibb.co/4mY79n7/abda69775a9d3f049e33b80e6a667b8b.png" alt="Marca 29">
+            <span class="name">Renault</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(29)">
+            <img class="car-image" src="https://i.ibb.co/X83Qg23/20231108-112714.png" alt="Marca 30">
+            <span class="name">SAAB</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(30)">
+            <img class="car-image" src="https://i.ibb.co/0K9hM3F/a9fcec3a15ce3025a64376aeb4d31084.png" alt="Marca 31">
+            <span class="name">SEAT<span style="display: none;">vag</span></span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(31)">
+            <img class="car-image" src="https://i.ibb.co/Htq0NYC/20231108-113257.png" alt="Marca 32">
+            <span class="name">Subaru</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(32)">
+            <img class="car-image" src="https://i.ibb.co/T09xLnB/tesla-logo-2004-black-download.webp" alt="Marca 33">
+            <span class="name">Tesla</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(33)">
+            <img class="car-image" src="https://i.ibb.co/5G8XPNt/20231010-174522.png" alt="Marca 34">
+            <span class="name">Toyota</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(34)">
+            <img class="car-image" src="https://i.ibb.co/yVDdMvr/20231108-114419.png" alt="Marca 35">
+            <span class="name">Volkswagen<span style="display: none;">vw,vag</span></span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(35)">
+            <img class="car-image" src="https://i.ibb.co/0hqS12N/20231108-115959.png" alt="Marca 36">
+            <span class="name">Volvo</span>
+        </li>
+        <li class="car-list-item" onclick="showCarInfo(36)">
+            <img class="car-image" src="https://i.ibb.co/gdh7QJQ/20231010-185631.png" alt="Marca 37">
+            <span class="name">ETKA(online)<span style="display: none;">audi,seat,volkswagen,vw,skoda,vag</span></span>
+        </li>
+        <br><br>
+    </ul>
+
+    <div id="search-results"></div>
+
+    <div class="car-info" id="car-info-0">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.mbdecoder.com/">Mbdecoder</a></li><br>
+            <li><a class="link" href="https://mb.vin/">MB.vin</a></li><br>
+            <li><a class="link" href="https://www.lastvin.com/es">LastVIN</a></li><br>
+            <li><a class="link" href=" https://www.ilcats.ru/mercedes/">Ilcats.ru</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-1">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.mdecoder.com/">Mdecode</a></li><br>
+            <li><a class="link" href="https://bimmer.work/">BimMer</a></li><br>
+            <li><a class="link" href=" https://www.elcats.ru/bmw/">Elcats.ru</a></li><br>
+            <li><a class="link" href="https://bimmercat.com/bmw/es/vin/decoder">Bimmercat</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-2">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://eper.fiatforum.com/en/Models/R/R">OpenPER</a></li><br>
+            <li><a class="link"
+                    href="https://www.pekidi.com/navi?FORCED=TRUE&COUNTRY=1&LANGUAGE=3&GUI_LANG=3&SAVE_PARAM=LANGUAGE&SBMK=R&MAKE=R">ePER</a>
+            </li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-3">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.elcats.ru/audi/">Elcats.ru</a></li><br>
+            <li><a class="link" href="https://www.audiworld.com/forums/vindecoder.php">Audi Word</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-4">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Chevrolet">Part Souq</a></li><br>
+            <li><a class="link" href="https://www.catcar.info/chrysler/?lang=en">Catcar.info</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-5">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.eurocarcare.net/orga.html">Eurocarcare</a></li><br>
+            <li><a class="link" href="https://www.elcats.ru/citroen/">Elcats.ru</a></li><br>
+            <li><a class="link" href="https://pp2000.ru/vin">PP2000</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-6">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://vindecodervehicle.com/car-brand/dacia">Dacia VIN 1</a></li><br>
+            <li><a class="link" href="https://www.freevindecoder.eu/ro">Dacia VIN 2</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-7">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://eper.fiatforum.com/en/Models/F/F">OpenPER</a></li><br>
+            <li><a class="link"
+                    href="https://www.pekidi.com/navi?FORCED=TRUE&COUNTRY=1&LANGUAGE=3&GUI_LANG=3&SAVE_PARAM=LANGUAGE&SBMK=F&MAKE=F">Fiat
+                    ePER</a></li><br>
+            <li><a class="link" href="https://aftersales.fiat.com/elum/Register.aspx?languageID=2&country=GB">eLUM</a>
+            </li><br>
+            <li><a class="link" href="https://eper.fiatforum.com/en/Models/F/T">Fiat ePER Comercial</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-8">
+        <hr>
+        <ul>
+            <li><a class="link"
+                    href="https://www.fordserviceinfo.com/Home/SetCountry?returnUrl=%2FFreeResources%2FFree">Ford
+                    Service</a></li><br>
+            <li><a class="link" href="https://www.elcats.ru/ford/">Elcats.ru</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-9">
+        <hr>
+        <ul>
+            <li><a class="link" href="http://vin.hondanet.net/">Honda VIN</a></li><br>
+            <li><a class="link" href="https://www.japancats.ru/honda/">Honda Europa</a></li><br>
+            <li><a class="link" href="https://honda-europe.epc-data.com/">Honda -EPC</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Honda">Honda Part Souq</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-10">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://hyundai.epc-data.com/">Hyudai EPC</a></li><br>
+            <li><a class="link" href="https://service.hyundai-motor.com/euro5/login.tiles">Hyudai -Motor</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Hyundai">Hyudai Part Souq</a>
+            </li><br>
+            <li><a class="link" href=" http://www.elcats.ru/hyundai/">Elcats.ru</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-11">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Infiniti">VIN Decodor</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-12">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://partsouq.com/en/catalog/genuine/locate?c=Jeep">Jeep Part Souq</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-13">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://kia.epc-data.com/">Kia -EPC</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-14">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://eper.fiatforum.com/en/Models/L/L">ePER Lancia 1</a></li><br>
+            <li><a class="link"
+                    href="https://www.pekidi.com/navi?FORCED=TRUE&COUNTRY=1&LANGUAGE=3&GUI_LANG=3&SAVE_PARAM=LANGUAGE&SBMK=L&MAKE=L">ePER
+                    Lancia 2</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-15">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://topix.landrover.jlrext.com/topix/vehicle/lookupForm">TOPIx VIN Land
+                    Rover</a></li><br>
+            <li><a class="link" href="https://osh.landrover.com/">LAND ROVER History</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-16">
+        <hr>
+        <ul>
+            <li><a class="link" href="http://www.japancats.ru/Lexus/">Lexus EPC 1</a></li><br>
+            <li><a class="link" href="https://lexus-europe.epc-data.com/">Lexus EPC 2</a></li><br>
+
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-17">
+        <hr>
+        <ul>
+
+            <li><a class="link" href="https://www.japancats.ru/mazda/">JapanCats</a></li><br>
+            <li><a class="link" href="https://www.ilcats.ru/mazda&language=en/">IlCats</a></li><br>
+            <li><a class="link" href="https://partsouq.com/en/catalog/genuine/locate?c=Mazda">PartSouq</a></li><br>
+            <li><a class="link"
+                    href="https://sso.capps.mazdaeur.com/login?state=hKFo2SBrMHpxS1lMSWVvcHhTUC1vMUhOTUoxSVExVFM4X0xoZaFupWxvZ2luo3RpZNkgOXdMNzRpZnJwc3V6Sm1JZ3BEWC1MR203RERsbzlfY0mjY2lk2SBzZk9NZkQ1WjlzY05SeFU1c0EzMVE1eDFIcjFhT0R4Vg&client=sfOMfD5Z9scNRxU5sA31Q5x1Hr1aODxV&protocol=oauth2&redirect_uri=https%3A%2F%2Fmapps.mazdaeur.com%2Fcas%2Fauth0Login%3Fservice%3Dhttps%3A%2F%2Fportal.mazdaeur.com%2F%3Fiss%3Dhttps%253A%252F%252Fsso.capps.mazdaeur.com%252F&audience=https%3A%2F%2Fmazdaeur-b2b-prd.eu.auth0.com%2Fuserinfo&scope=openid%20email&response_type=code">Mazda
+                    Portal</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-18">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.mitsubishitechinfo.eu/vin-identification">Mitsubishi Technical
+                    Information</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Mitsubishi">Mitsubishi EPC</a>
+            </li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-19">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.japancats.ru/Nissan/">Nissan EPC 1</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Nissan">Nissan EPC 2</a></li><br>
+            <li><a class="link" href="https://www.nissanhelp.com/diy/common/nissan_vin.php">VIN Nissan</a></li><br>
+            <li><a class="link"
+                    href="https://login.eu.nissan.biz/nidp/idff/sso?id=B2B&sid=1&option=credential&sid=1&target=https%3A%2F%2Feu.nissan.biz%2F">Nissan
+                    Home</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-20">
+        <hr>
+        <ul>
+            <li><a class="link" href="http://opelvindekoder.pl/">Opel VIN Decoder 1</a></li><br>
+            <li><a class="link" href="https://opel.7zap.com/en/car/vin/w0ljd7ec0h4192169/">Opel VIN Decoder 2</a></li>
+            <br>
+            <li><a class="link" href="https://opel.ilcats.ru/">Ilcats.ru</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-21">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://pp2000.ru/vin">PP2000 VIN Decoder</a></li><br>
+            <li><a class="link" href="https://vindecoder.eu/peugeot">Peugeot VIN decoder</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Peugeot">Peugeot EPC</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-22">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://dmv-permit-test.com/vin-decoder/maserati">VIN decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-23">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://osh.jaguar.com/">VIN decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-24">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.youcanic.com/porsche-vin-decoder/">PORSCHE VIN DECODOR 1</a></li><br>
+            <li><a class="link" href="https://vinanalytics.com/">PORSCHE VIN DECODOR 2</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-25">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.mopar.com/en-us/my-vehicle/vin-lookup.html">VIN Decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-26">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://epicvin.com/vin-decoder/bentley">VIN Decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-27">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://dmv-permit-test.com/vin-decoder/maserati">VIN Decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-28">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Renault">VIN Decoder</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-29">
+        <hr>
+        <ul>
+            <li><a class="link" href="http://www.saabsportugal.com/en/index.php">SAAB VIN Decoder 1</a></li><br>
+            <li><a class="link" href="http://saabvin.com/">SAAB VIN Decoder 2</a></li><br>
+            <li><a class="link" href="https://www.vindecoderz.com/EN/Saab">SAAB VIN Decoder 3</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-30">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.elcats.ru/seat/">Ilcats.ru</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-31">
+        <hr>
+        <ul>
+            <li><a class="link" href="http://www.subaru-sale.ru/vin/">SUBARU VIN Decoder 1</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Subaru">SUBARU VIN Decoder 2</a>
+            </li><br>
+            <li><a class="link" href="https://www.japancats.ru/subaru/">SUBARU VIN Decoder 3</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-32">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.teslaregister.org/">TESLAregister</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-33">
+        <hr>
+        <ul>
+
+            <li><a class="link" href="https://www.toyodiy.com/parts/q.html">TOYODIY</a></li><br>
+            <li><a class="link" href="https://www.japan-parts.eu/">TOYOTA VIN DECODER 1</a></li><br>
+            <li><a class="link" href="https://www.japancats.ru/Toyota/">TOYOTA VIN DECODER 2</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Toyota">TOYOTA VIN DECODER
+                    3</a><br>
+            <li><a class="link"
+                    href="https://www.toyota-tech.eu:8443/auth/realms/TD1realm/protocol/openid-connect/auth?redirect_uri=https://www.toyota-tech.eu/owin/security/keycloak/ApplicationCookie/callback&response_type=code&scope=openid&state=oidc_state_fea6c0160e8740de9f10542445c3d80f&client_id=toyota&kc_idp_hint=">TOYOTA
+                    HOME</a></li>
+            </li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-34">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://volkswagen.7zap.com/es/rdw/">VOLKSWAGEN VIN DECODER 1</a></li><br>
+            <li><a class="link" href="https://www.elcats.ru/vw/">VOLKSWAGEN VIN DECODER 2</a></li><br>
+            <li><a class="link" href="https://partsouq.com/es/catalog/genuine/locate?c=Volkswagen">VOLKSWAGEN VIN
+                    DECODER 3</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-35">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://www.volvohowto.com/volvo-vin-decoder/">VOLVO VIN DECODER 1</a></li><br>
+            <li><a class="link" href="https://decode.youcanic.com/">VOLVO VIN DECODER 2</a></li><br>
+            <li><a class="link" href="https://www.elcats.ru/volvo/">VOLVO VIN DECODER 3</a></li>
+        </ul>
+    </div>
+    <div class="car-info" id="car-info-36">
+        <hr>
+        <ul>
+            <li><a class="link" href="https://webautocats.com/etka/">ETKA (online)</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function searchCars() {
+            var input, filter, ul, li, i, carList;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("car-list");
+            li = ul.getElementsByClassName("car-list-item");
+            carList = document.getElementById("search-results");
+            carList.innerHTML = "";
+
+            for (i = 0; i < li.length; i++) {
+                var carName = li[i].getElementsByTagName("span")[0].innerHTML;
+                if (carName.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "flex";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+
+            ul.style.display = "block";
+            hideCarInfo();
+        }
+
+        function showCarInfo(index) {
+            hideCarInfo();
+            var carInfo = document.getElementById("car-info-" + index);
+            carInfo.style.display = "block";
+        }
+
+        function hideCarInfo() {
+            var carInfoElements = document.getElementsByClassName("car-info");
+            for (var i = 0; i < carInfoElements.length; i++) {
+                carInfoElements[i].style.display = "none";
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById("search").value = "";
+            searchCars();
+            var carList = document.getElementById("car-list");
+            carList.style.display = "none";
+        }
+    </script>
+    <img class="watermark" src="https://i.ibb.co/q9v4wW9/20230913-133046.png" alt="20230913-133046" border="0"></a>
+    <script>
+
+        // JavaScript pentru a obține anul curent
+        var year = new Date().getFullYear();
+        document.getElementById("currentYear").textContent = year;
+    </script>
+</body>
+
+</html>
